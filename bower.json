@@ -1,0 +1,22 @@
+{
+  "name": "game-store",
+  "description": "",
+  "main": "",
+  "authors": [
+    "intern-tieumomo <intern.tieumomo@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap.git#^4.5.2",
+    "Font-Awesome": "https://github.com/FortAwesome/Font-Awesome.git#^5.14.0",
+    "Modernizr": "https://github.com/Modernizr/Modernizr.git#^3.11.2"
+  }
+}
