@@ -1,0 +1,17 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/client/styles/custom.css": "/client/styles/custom.css",
+    "/client/scripts/cart.js": "/client/scripts/cart.js",
+    "/client/scripts/cart-detail.js": "/client/scripts/cart-detail.js",
+    "/client/scripts/checkout.js": "/client/scripts/checkout.js",
+    "/client/scripts/localization.js": "/client/scripts/localization.js",
+    "/client/scripts/profile.js": "/client/scripts/profile.js",
+    "/client/scripts/redirect.js": "/client/scripts/redirect.js",
+    "/client/scripts/become-publisher.js": "/client/scripts/become-publisher.js",
+    "/client/scripts/owned-games.js": "/client/scripts/owned-games.js",
+    "/client/scripts/publish-game.js": "/client/scripts/publish-game.js",
+    "/client/scripts/blog-detail.js": "/client/scripts/blog-detail.js",
+    "/client/scripts/game-detail.js": "/client/scripts/game-detail.js",
+    "/client/scripts/game.js": "/client/scripts/game.js"
+}

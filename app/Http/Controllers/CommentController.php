@@ -21,6 +21,10 @@ class CommentController extends Controller
     		'email' => $comment->account->email,
     		'updated_at' => date('Y-m-d H:i:s', strtotime($comment->updated_at)),
     		'comment' => $comment->comment,
+            'ph' => trans('text.blog-detail.comment_ph'),
+            'modal-title' => trans('text.blog-detail.update'),
+            'delete' => trans('text.blog-detail.delete'),
+            'save' => trans('text.blog-detail.save'),
     	];
 
     	return $result;
@@ -30,7 +34,7 @@ class CommentController extends Controller
     {
     	Comment::destroy($id);
 
-    	return "Comment has been Deleted!";
+    	return trans('text.blog-detail.delete-message');
     }
 
     public function update(Request $request)
@@ -41,7 +45,7 @@ class CommentController extends Controller
 
     	$result = [
     		"comment" => $request->comment,
-    		"text" => "Comment has been Updated!",
+    		"text" => trans('text.blog-detail.update-message'),
     	];
 
     	return $result;

@@ -140,9 +140,5 @@
 @section('js')
 	<script type="text/javascript" src="bower_components/client/vendor/daterangepicker/moment.min.js"></script>
 	<script type="text/javascript" src="bower_components/client/vendor/daterangepicker/daterangepicker.js"></script>
-	<script type="text/javascript">
-		$('#sorting').change(function() {
-			$('#search-form').submit();
-		});
-	</script>
+	<script type="text/javascript" src="{{ mix('/client/scripts/game.js') }}"></script>
 @endsection

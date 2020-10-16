@@ -17,7 +17,7 @@
 						@foreach($posts as $post)
 							<div class="item-blog p-b-80">
 								<a href="{{ route('blogs.show', $post->id) }}" class="item-blog-img pos-relative dis-block hov-img-zoom">
-									<img src="{{ asset('client/images/blogs/' . $post->id . '/preview.jpg') }}">
+									<img src="{{ asset(config('link.blog-link') . $post->id . '/preview.jpg') }}">
 
 									<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
 										{{ $post->release_date }}

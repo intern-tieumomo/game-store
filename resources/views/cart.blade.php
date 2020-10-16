@@ -126,9 +126,9 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="bower_components/client/js/cart-detail.js"></script>
-    <script type="text/javascript" src="bower_components/client/js/checkout.js"></script>
+    <script type="text/javascript" src="{{ mix('/client/scripts/cart-detail.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/client/scripts/checkout.js') }}"></script>
     @if (!session()->get('cart') || count(session()->get('cart')) < 1)
-        <script type="text/javascript" src="bower_components/client/js/redirect.js" key="no-game-in-cart"></script>
+        <script type="text/javascript" src="{{ mix('/client/scripts/redirect.js') }}" key="no-game-in-cart"></script>
     @endif
 @endsection

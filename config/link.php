@@ -20,5 +20,6 @@ return [
     'user-icon' => 'client/images/icons/icon-header-01.png',
     'cart-icon' => 'client/images/icons/icon-header-02.png',
     'game-detail-link' => 'client/images/games/',
+    'blog-link' => 'client/images/blogs/',
     'logo' => 'client/images/icons/logo2.png',
 ];

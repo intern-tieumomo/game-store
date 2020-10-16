@@ -95,7 +95,7 @@
 
 						@if (Auth::user()->role == config('role.user'))
 							<span class="linedivide1"></span>
-							
+
 							<div class="header-wrapicon2" id="header-wrapicon2">
 								<img src="{{ asset(config('link.cart-icon')) }}" class="header-icon1 js-show-header-dropdown">
 
@@ -108,7 +108,7 @@
 								</span>
 
 								<div class="header-cart header-dropdown" id="header-cart">
-									<div id="header-cart-detail"> 
+									<div id="header-cart-detail">
 										@if (!session()->get('cart') || count(session()->get('cart')) < 1)
 											<ul class="header-cart-wrapitem" id="header-cart-wrapitem">
 												<li class="header-cart-item">
@@ -385,13 +385,13 @@
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/bootstrap/js/popper.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/select2/select2.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/bower_components/client/js/localization.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('client/scripts/localization.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/slick/slick.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/js/slick-custom.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/countdowntime/countdowntime.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/lightbox2/js/lightbox.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/bower_components/client/vendor/sweetalert/sweetalert.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('/bower_components/client/js/cart.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('client/scripts/cart.js') }}"></script>
 	@yield('js')
 	<script src="{{ asset('/bower_components/client/js/main.js') }}"></script>
 </body>

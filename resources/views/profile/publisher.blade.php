@@ -114,5 +114,5 @@
 </section>
 
 @section('js')
-	<script type="text/javascript" src="bower_components/client/js/profile.js"></script>
+	<script type="text/javascript" src="{{ mix('/client/scripts/profile.js') }}"></script>
 @endsection
