@@ -42,9 +42,9 @@
                                             {{ $item['game']->title }}
                                         </a>
                                     </td>
-                                    <td class="column-3">{{ $item['game']->price . config('string.vnd') }}</td>
+                                    <td class="column-3">{{ moneyFormat($item['game']->price) . config('string.vnd') }}</td>
                                     <td class="column-4"></td>
-                                    <td class="column-5">{{ $item['game']->price . config('string.vnd') }}</td>
+                                    <td class="column-5">{{ moneyFormat($item['game']->price) . config('string.vnd') }}</td>
                                 </tr>
                             @endforeach
                         </table>

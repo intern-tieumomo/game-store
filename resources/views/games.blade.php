@@ -121,7 +121,7 @@
 										<input type="hidden" class="block2-token" value="{{ csrf_token() }}">
 
 										<span class="block2-price m-text6 p-r-5">
-											{{ $game->price . config('string.vnd') }}
+											{{ moneyFormat($game->price) . config('string.vnd') }}
 										</span>
 									</div>
 								</div>

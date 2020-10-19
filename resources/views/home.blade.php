@@ -177,7 +177,7 @@
     								</a>
 
     								<span class="block2-price m-text6 p-r-5">
-    									{{ $game->price . config('string.vnd') }}
+    									{{ moneyFormat($game->price) . config('string.vnd') }}
     								</span>
     							</div>
     						</div>
