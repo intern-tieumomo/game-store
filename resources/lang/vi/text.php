@@ -147,7 +147,7 @@ return [
         'home' => 'Trang Chủ',
         'blogs' => 'Blogs',
         'by' => 'Viết bởi',
-        'comment' => 'Bình luận',
+        'comment' => 'Bình luận về bài viết',
         'comments' => 'bình luận',
         'email' => 'Địa chỉ email của bạn sẽ hiển thị công khai!',
         'comment_ph' => 'Bình luận...',

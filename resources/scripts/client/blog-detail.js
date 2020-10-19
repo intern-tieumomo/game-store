@@ -41,8 +41,8 @@ $('.post-comment').on('click', function(e) {
             "</div>\n";
             $('textarea[name=comment]').val("");
             $('.comments').prepend(html);
-            // $('.leave-comment').html(html);
-            console.log(html);
+            var count_comment = parseInt($('.number-comment').html());
+            $('.number-comment').text(count_comment + 1);
         }
     });
 });
@@ -62,6 +62,8 @@ $(document).on('click', '.delete-comment', function(e) {
             $(".comment-text[data-id=" + id + "]").remove();
             $("#update-comment-" + id).remove();
             $(".modal-backdrop").remove();
+            var count_comment = parseInt($('.number-comment').html());
+            $('.number-comment').text(count_comment - 1);
         }
     });
 });

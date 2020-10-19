@@ -14,7 +14,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-12 col-lg-9 p-b-75">
 					<div class="p-r-50 p-r-0-lg">
-						@foreach($posts as $post)
+						@foreach ($posts as $post)
 							<div class="item-blog p-b-80">
 								<a href="{{ route('blogs.show', $post->id) }}" class="item-blog-img pos-relative dis-block hov-img-zoom">
 									<img src="{{ asset(config('link.blog-link') . $post->id . '/preview.jpg') }}">
@@ -43,7 +43,7 @@
 									</div>
 
 									<p class="p-b-12">
-										{{ Str::limit($post->content, 200, ' ...') }}
+										{{ Str::limit($post->content, config('number.character_in_blog_preview'), ' ...') }}
 									</p>
 
 									<a href="{{ route('blogs.show', $post->id) }}" class="s-text20">

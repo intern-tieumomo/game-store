@@ -60,7 +60,7 @@ Route::middleware('locale')->group(function () {
         'store',
     ]);
     Route::resource('/blogs', 'BlogController');
-    Route::post('/post-comment', 'CommentController@comment')->name('post.comment');
+    Route::post('/post-comment', 'CommentController@create')->name('post.comment');
     Route::delete('/delete-comment/{id}', 'CommentController@destroy')->name('delete.comment');
     Route::post('/update-comment', 'CommentController@update')->name('update.comment');
 

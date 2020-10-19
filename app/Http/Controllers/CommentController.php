@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function comment(Request $request)
+    public function create(Request $request)
     {
     	$comment = Comment::create([
     		'comment' => $request->comment,

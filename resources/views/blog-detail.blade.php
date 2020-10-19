@@ -85,7 +85,7 @@
 									</div>
 								@else
 									<div class="comments m-b-30">
-										@foreach($post->comments as $item)
+										@foreach ($post->comments as $item)
 											<p class="comment-detail" data-id="{{ $item->id }}">
 												<i>
 													<b><i class="fa fa-user-circle" aria-hidden="true"></i> {{ $item->account->email }}</b>@if ($post->account_id == $item->account->id) <span class="badge badge-success">{{ trans('text.blog-detail.author') }}</span> @endif - {{ $item->updated_at }}
