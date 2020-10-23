@@ -46,7 +46,7 @@
 
 								<div class="s-text8 flex-w flex-m p-b-21">
 									<span>
-										{{ trans('text.blog-detail.by') }} <i class="fa fa-gitlab" aria-hidden="true"></i> <b>{{ $post->account->email }}</b>
+										{{ trans('text.blog-detail.by') }} <i class="fa fa-gitlab" aria-hidden="true"></i> <b>{{ $post->account->publisher->name }}</b>
 										<span class="m-l-3 m-r-6">|</span>
 									</span>
 
@@ -76,8 +76,8 @@
 						<div id="section-comment">
 							<div id="list-comment">
 								@if (count($post->comments) == 0)
-									<div class="leave-comment m-b-30">
-										<p class="p-b-25">
+									<div class="comments leave-comment m-b-30">
+										<p class="no-comment p-b-25">
 											<i>
 												<i class="fa fa-comments-o" aria-hidden="true"></i> <span class="p-b-25">{{ trans('text.blog-detail.no_comment') }} <label for="comment">{{ trans('text.blog-detail.the_first') }} <i class="fa fa-hand-o-down" aria-hidden="true"></i></label></span>
 											</i>
@@ -91,6 +91,10 @@
 													<b><i class="fa fa-user-circle" aria-hidden="true"></i> {{ $item->account->email }}</b>@if ($post->account_id == $item->account->id) <span class="badge badge-success">{{ trans('text.blog-detail.author') }}</span> @endif - {{ $item->updated_at }}
 													@if (Auth::check() && Auth::id() == $item->account->id)
 														&nbsp;<i class="fa fa-pencil-square-o notice" aria-hidden="true" data-toggle="modal" data-target="#update-comment-{{ $item->id }}"></i>
+													@endif
+
+													@if (isAdmin())
+														<i class="admin-delete-comment fa fa-trash-o text-danger" aria-hidden="true" data-id={{ $item->id }}></i>
 													@endif
 													<br>
 												</i>
@@ -149,4 +153,25 @@
 
 @section('js')
 	<script type="text/javascript" src="{{ mix('/client/scripts/blog-detail.js') }}"></script>
+	<script type="text/javascript">
+		$('.admin-delete-comment').on('click', function() {
+			var id = $(this).data('id');
+
+			$.ajax({
+			    url: "/delete-comment/" + id,
+			    type: "DELETE",
+			    data: {
+			        "_token": $('meta[name="csrf-token"]').attr('content')
+			    },
+			    success: function(result) {
+			        $(".comment-detail[data-id=" + id + "]").remove();
+			        $(".comment-text[data-id=" + id + "]").remove();
+			        $("#update-comment-" + id).remove();
+			        $(".modal-backdrop").remove();
+			        var count_comment = parseInt($('.number-comment').html());
+			        $('.number-comment').text(count_comment - 1);
+			    }
+			});
+		});
+	</script>
 @endsection

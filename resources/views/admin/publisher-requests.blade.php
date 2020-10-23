@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Account || Game Store')
+@section('title', 'Become Publisher Request || Game Store')
 
 @section('css')
 	<link rel="stylesheet" type="text/css" href="bower_components/admin/css/core/menu/menu-types/vertical-menu.css">

@@ -23,7 +23,7 @@ $(document).ready(function() {
 		}).then(function (result) {
 			if (result.value) {
 				$.ajax({
-					url: "accounts/" + id,
+					url: "manage-accounts/" + id,
 					type: "DELETE",
 		        	data: {
 		        		"_token": $('meta[name="csrf-token"]').attr('content')
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			var role_text = $(this).parent().parent().find('#data-role option:selected').text();
 	 
 			$.ajax({
-				url: "accounts/" + id,
+				url: "manage-accounts/" + id,
 				type: "PUT",
 	        	data: {
 	        		"_token": $('meta[name="csrf-token"]').attr('content'),
@@ -127,7 +127,7 @@ $(document).ready(function() {
 			var role = $('select[name=role]').val();
 
 			$.ajax({
-				url: "accounts",
+				url: "manage-accounts",
 				type: "POST",
 	        	data: {
 	        		"_token": $('meta[name="csrf-token"]').attr('content'),

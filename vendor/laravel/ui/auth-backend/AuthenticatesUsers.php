@@ -18,6 +18,11 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+
         return view('auth.login');
     }
 
@@ -67,7 +72,7 @@ trait AuthenticatesUsers
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
     }
 
@@ -173,7 +178,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/');
+            : redirect(url()->previous());
     }
 
     /**

@@ -43,9 +43,12 @@ class LoginController extends Controller
     {
         if (Auth::user()->role == 9) {
             $this->redirectTo = route('admin.index');
+            
             return $this->redirectTo;
-        } elseif (Auth::user()->role == 5) {
-            Auth::logout();
-        } 
+        } else {
+            $this->redirectTo = session()->get('url.intended');
+
+            return $this->redirectTo;
+        }
     }
 }

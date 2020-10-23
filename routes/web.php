@@ -20,130 +20,94 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
+//i18n
 Route::get('/change-language/{lang}', 'HomeController@changeLanguage')->name('change-language');
 
 Route::middleware('locale')->group(function () {
+    //auth
     Auth::routes();
 
-	Route::get('/', 'HomeController@index')->name('home');
+    //home and error page
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/403', 'HomeController@error403')->name('error.403');
 
-	Route::get('/profile', 'ProfileController@index')->name('profile.index');
-    Route::post('/user-profile', 'ProfileController@updateUser')->name('user.profile.store');
-    Route::post('/publisher-profile', 'ProfileController@updatePublisher')->name('publisher.profile.store');
-    Route::post('/change-password', 'ProfileController@changePassword')->name('profile.password');
+    //loggedin features
+    Route::middleware('isLogin')->group(function () {
+        //user features
+        Route::middleware('isUser')->group(function () {
+            //profile
+            Route::post('/user-profile', 'ProfileController@updateUser')->name('user.profile.store');
 
+            //games
+            Route::get('/download', 'GameController@download')->name('games.download');
+            Route::get('/owned-games', 'GameController@owned')->name('games.owned');
+            Route::get('/search-owned-games', 'GameController@searchOwnedGames')->name('games.searchOwned');
+            Route::resource('/reviews', 'ReviewController')->only([
+                'store',
+            ]);
+
+            //cart features
+            Route::get('/add-to-cart', 'CartController@add')->name('cart.store');
+            Route::get('/view-cart', 'CartController@index')->name('cart.index');
+            Route::get('/fetch-cart', 'CartController@fetch')->name('cart.fetch');
+            Route::delete('/delete-cart-item', 'CartController@destroy')->name('cart.destroy');
+
+            //payment features
+            Route::get('/checkout', 'PaymentController@index')->name('checkout.index');
+            Route::post('/checkout', 'PaymentController@store')->name('checkout.store');
+            Route::get('/checkout-finish', 'PaymentController@finish')->name('checkout.finish');
+            Route::get('/payment-history', 'PaymentController@history')->name('checkout.history');
+            Route::get('/payment-detail', 'PaymentController@detail')->name('checkout.detail');
+
+            //become publisher
+            Route::get('/become-publisher', 'UserController@becomePublisher')->name('become.publisher');
+        });
+
+        //publisher features
+        Route::middleware('isPublisher')->group(function () {
+            //profile
+            Route::post('/publisher-profile', 'ProfileController@updatePublisher')->name('publisher.profile.store');
+
+            //publish game
+            Route::get('/publish-game', 'PublisherController@index')->name('publisher.index');
+            Route::post('/publish-game', 'PublisherController@publish')->name('publisher.publish');
+            Route::get('/publisher-request', 'MailController@publisherRequest')->name('publisher.request');
+
+            //blog features
+            Route::get('/create-post', 'PublisherController@createPost')->name('create.post');
+            Route::post('/store-post', 'PublisherController@storePost')->name('store.post');
+        });
+        
+        //profile features
+        Route::get('/profile', 'ProfileController@index')->name('profile.index');
+        Route::post('/change-password', 'ProfileController@changePassword')->name('profile.password');
+
+        Route::post('/post-comment', 'CommentController@create')->name('post.comment');
+        Route::delete('/delete-comment/{id}', 'CommentController@destroy')->name('delete.comment');
+        Route::post('/update-comment', 'CommentController@update')->name('update.comment');
+
+        //admin features
+        Route::group(['middleware' => 'isAdmin', 'namespace' => 'Admin'], function () {
+            Route::get('/admin', 'HomeController@index')->name('admin.index');
+
+            //crud
+            Route::resource('/manage-accounts', 'AccountController');
+            Route::resource('/manage-comments', 'CommentController');
+            Route::resource('/manage-games', 'GameController');
+            Route::resource('/manage-genres', 'GenreController');
+            Route::resource('/manage-payments', 'PaymentController');
+            
+            //requests
+            Route::resource('/pending-games', 'PendingGameController');
+            Route::resource('/publisher-requests', 'PublisherRequestController');
+        });
+    });
+
+    //game features
     Route::get('/games', 'GameController@index')->name('games.index');
     Route::get('/game-detail', 'GameController@gameDetail')->name('games.detail');
-    Route::get('/download', 'GameController@download')->name('games.download');
-    Route::get('/owned-games', 'GameController@owned')->name('games.owned');
-    Route::get('/search-owned-games', 'GameController@searchOwnedGames')->name('games.searchOwned');
-
     Route::get('/games-by-genre', 'GenreController@index')->name('genres.index');
-
-    Route::get('/add-to-cart', 'CartController@add')->name('cart.store');
-    Route::get('/view-cart', 'CartController@index')->name('cart.index');
-    Route::get('/fetch-cart', 'CartController@fetch')->name('cart.fetch');
-    Route::delete('/delete-cart-item', 'CartController@destroy')->name('cart.destroy');
-
-    Route::get('/checkout', 'PaymentController@index')->name('checkout.index');
-    Route::post('/checkout', 'PaymentController@store')->name('checkout.store');
-    Route::get('/checkout-finish', 'PaymentController@finish')->name('checkout.finish');
-    Route::get('/payment-history', 'PaymentController@history')->name('checkout.history');
-    Route::get('/payment-detail', 'PaymentController@detail')->name('checkout.detail');
-
-    Route::get('/become-publisher', 'UserController@becomePublisher')->name('become.publisher');
-    Route::get('/publish-game', 'PublisherController@index')->name('publisher.index');
-    Route::post('/publish-game', 'PublisherController@publish')->name('publisher.publish');
-    Route::get('/publisher-request', 'MailController@publisherRequest')->name('publisher.request');
-
-    Route::resource('/reviews', 'ReviewController')->only([
-        'store',
-    ]);
+    
+    //blog features
     Route::resource('/blogs', 'BlogController');
-    Route::post('/post-comment', 'CommentController@create')->name('post.comment');
-    Route::delete('/delete-comment/{id}', 'CommentController@destroy')->name('delete.comment');
-    Route::post('/update-comment', 'CommentController@update')->name('update.comment');
-
-    Route::namespace('Admin')->group(function () {
-        Route::get('/admin', 'HomeController@index')->name('admin.index');
-
-        Route::resource('/accounts', 'AccountController');
-        Route::resource('/pending-games', 'PendingGameController');
-        Route::resource('/publisher-requests', 'PublisherRequestController');
-    });
 });
-
-// Route::get('clear-session', function() {
-//     Session::flush();
-// });
-
-// Route::get('/seeder/account', function() {
-//     $faker = Faker\Factory::create();
-
-//     DB::table('accounts')->insert([
-// 		'email'        => $faker->email,
-// 		'password'     => bcrypt('password'),
-// 		'role'         => $faker->numberBetween(1, 2),
-// 		'cookie_token' => bcrypt($faker->password),
-// 		'created_at'   => Carbon::now(),
-// 		'updated_at'   => Carbon::now(),
-//     ]);
-// });
-
-// Route::get('/seeder/user', function() {
-//     $faker = Faker\Factory::create();
-
-//     for($i = 3;$i<=25;$i++) {
-//     	DB::table('users')->insert([
-// 			'name'       => $faker->name,
-// 			'birthday'   => $faker->date('Y-m-d', 'now'),
-// 			'address'    => $faker->address,
-// 			'phone'      => $faker->phoneNumber,
-// 			'account_id' => $i,
-// 			'created_at' => Carbon::now(),
-// 			'updated_at' => Carbon::now(),
-// 	    ]);
-//     }
-// });
-
-// Route::get('/seeder/game', function() {
-//     $faker = Faker\Factory::create();
-
-//     for($i = 1;$i<=50;$i++) {
-//     	DB::table('games')->insert([
-// 			'title'        => $faker->name,
-// 			'price'        => $faker->numberBetween(50, 1500)*1000,
-// 			'release_date' => Carbon::now(),
-// 			'summary'      => $faker->text(500),
-// 			'features'     => $faker->text(500),
-// 			'requirement'  => 'CPU: Intel Core i5 or AMD equivalent<br>RAM: 8 GB<br>OS: Windows 10 64bit only<br>VIDEO CARD: NVIDIA GTX 660 or AMD Radeon HD 7950<br>PIXEL SHADER: 5.0<br>VERTEX SHADER: 5.0<br>FREE DISK SPACE: 2 GB<br>DEDICATED VIDEO RAM: 2048 MB',
-// 			'rating'       => $faker->numberBetween(1, 9),
-// 			'publisher_id' => $faker->numberBetween(1, 2),
-// 			'created_at'   => Carbon::now(),
-// 			'updated_at'   => Carbon::now(),
-// 	    ]);
-//     }
-// });
-
-// Route::get('test', function() {
-//     $genres = Genre::all();
-
-//     foreach ($genres as $genre) {
-//     	echo "<pre>";
-//     	print_r($genre->name);
-//     	echo "</pre>";
-//     }
-// });
-
-// Route::get('/seeder/genres', function() {
-//     $faker = Faker\Factory::create();
-
-//     for($i = 1;$i<=50;$i++) {
-//         DB::table('game_genre')->insert([
-//             'game_id' => rand(1, 50),
-//             'genre_id' => rand(1,23),
-//             'created_at' => Carbon::now(),
-//             'updated_at' => Carbon::now(),
-//         ]);
-//     }
-// });

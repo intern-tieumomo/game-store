@@ -56,7 +56,7 @@
 							</div>
 						</div>
 						<a href="{{ route('publisher.index') }}">Publish Game <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a><hr>
-						<a href="#">Create Post <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+						<a href="{{ route('create.post') }}">Create Post <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
 					</div>
 				</div>
 			</div>

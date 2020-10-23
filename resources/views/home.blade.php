@@ -72,7 +72,7 @@
 						<img src="{{ asset('client/images/shooter-genre.jpg') }}" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="{{ route('genres.index', ['id' => 3]) }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								{{ trans('text.home.shooter') }}
 							</a>
 						</div>
@@ -82,7 +82,7 @@
 						<img src="{{ asset('client/images/sport-genre.jpg') }}" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="{{ route('genres.index', ['id' => 11]) }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								{{ trans('text.home.sport') }}
 							</a>
 						</div>
@@ -94,7 +94,7 @@
 						<img src="{{ asset('client/images/adventure-genre.jpg') }}" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="{{ route('genres.index', ['id' => 18]) }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								{{ trans('text.home.adventure') }}
 							</a>
 						</div>
@@ -104,7 +104,7 @@
 						<img src="{{ asset('client/images/rpg-genre.jpg') }}" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="{{ route('genres.index', ['id' => 9]) }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								{{ trans('text.home.rpg') }}
 							</a>
 						</div>
@@ -116,7 +116,7 @@
 						<img src="{{ asset('client/images/indie-genre.jpg') }}" alt="IMG-BENNER">
 
 						<div class="block1-wrapbtn w-size2">
-							<a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+							<a href="{{ route('genres.index', ['id' => 21]) }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
 								{{ trans('text.home.indie') }}
 							</a>
 						</div>
@@ -165,7 +165,7 @@
     								<div class="block2-overlay trans-0-4">
     									<div class="block2-btn-addcart w-size1 trans-0-4">
     										<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                {{ trans('text.home.add') }}									
+                                                <a class="text-white" href="{{ route('games.detail', ['id' => $game->id]) }}">View</a>
     										</button>
     									</div>
     								</div>
@@ -201,7 +201,7 @@
     			<div class="block4 wrap-pic-w">
     				<img src="{{ asset('client/images/ins/ins-' . $i . '.jpg') }}" alt="IMG-INSTAGRAM">
 
-    				<a href="{{ config('link.instagram') }}" class="block4-overlay sizefull ab-t-l trans-0-4">
+    				<a href="{{ config('link.instagram') }}" class="block4-overlay sizefull ab-t-l trans-0-4" target="_blank">
     					<div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">
     						<p class="s-text10 m-b-15 h-size1 of-hidden">
     							{{ trans('text.home.ins') }}
@@ -220,7 +220,7 @@
 	<section class="shipping bgwhite p-t-62 p-b-46">
 		<div class="flex-w p-l-15 p-r-15">
 			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
-				<h4 class="m-text12 t-center">
+				<h4 class="m-text12 t-center text-success">
 					{{ trans('text.home.new_updates') }}
 				</h4>
 
@@ -230,7 +230,7 @@
 			</div>
 
 			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 bo2 respon2">
-				<h4 class="m-text12 t-center">
+				<h4 class="m-text12 t-center text-warning">
 					{{ trans('text.home.refund') }}
 				</h4>
 
@@ -240,7 +240,7 @@
 			</div>
 
 			<div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
-				<h4 class="m-text12 t-center">
+				<h4 class="m-text12 t-center text-danger">
 					{{ trans('text.home.opening') }}
 				</h4>
 

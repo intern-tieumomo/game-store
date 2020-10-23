@@ -12,33 +12,35 @@ $('.post-comment').on('click', function(e) {
             "post_id": post_id,
         },
         success: function(result) {
-            var html = "" +
-            "<p class='comment-detail' data-id='" + result['id'] + "'>\n" +
-                "<i>\n" +
-                    "<b><i class='fa fa-user-circle' aria-hidden='true'></i> " + result['email'] + "</b> - " + result['updated_at'] + " &nbsp;<i class='fa fa-pencil-square-o notice' aria-hidden='true' data-toggle='modal' data-target='#update-comment-" + result['id'] + "'></i>\n" +
-                    "<br>\n" +
-                "</i>\n" +
-                "<p class='comment-text p-b-25' data-id='" + result['id'] + "'>" + result['comment'] + "</p>\n" +
-            "</p>\n" +
-            "<div class='modal show' id='update-comment-" + result['id'] + "' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>\n" +
-                "<div class='modal-dialog modal-lg'>\n" +
-                    "<div class='modal-content'>\n" +
-                        "<div class='modal-header'>\n" +
-                            "<h5 class='modal-title' id='exampleModalLabel'>" + result['modal-title'] + "</h5>\n" +
-                            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>\n" +
-                                "<span aria-hidden='true'>&times;</span>\n" +
-                            "</button>\n" +
-                        "</div>\n" +
-                        "<div class='modal-body'>\n" +
-                            "<textarea class='dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20' id='ta-update-comment' data-id='" + result['id'] + "' name='update_comment' placeholder='" + result['ph'] + "'>" + result['comment'] + "</textarea>\n" +
-                        "</div>\n" +
-                        "<div class='modal-footer'>\n" +
-                            "<button type='button' data-id='" + result['id'] + "' class='delete-comment btn btn-secondary bo-rad-20 s-text1'>" + result['delete'] + "</button>\n" +
-                            "<button type='button' data-id='" + result['id'] + "' class='update-comment btn flex-c-m bg1 bo-rad-20 hov1 s-text1 trans-0-4'>" + result['save'] + "</button>\n" +
-                        "</div>\n" +
-                    "</div>\n" +
-                "</div>\n" +
-            "</div>\n";
+            var html = `
+                <p class='comment-detail' data-id='${result['id']}'>
+                    <i>
+                        <b><i class='fa fa-user-circle' aria-hidden='true'></i> ${result['email']}</b> - ${result['updated_at']} &nbsp;<i class='fa fa-pencil-square-o notice' aria-hidden='true' data-toggle='modal' data-target='#update-comment-${result['id']}'></i>
+                        <br>
+                    </i>
+                    <p class='comment-text p-b-25' data-id='${result['id']}'>${result['comment']}</p>
+                </p>
+                <div class='modal show' id='update-comment-${result['id']}' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-lg'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='exampleModalLabel'>${result['modal-title']}</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <textarea class='dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20' id='ta-update-comment' data-id='${result['id']}' name='update_comment' placeholder='${result['ph']}'>${result['comment']}</textarea>
+                            </div>
+                            <div class='modal-footer'>
+                                <button type='button' data-id='${result['id']}' class='delete-comment btn btn-secondary bo-rad-20 s-text1'>${result['delete']}</button>
+                                <button type='button' data-id='${result['id']}' class='update-comment btn flex-c-m bg1 bo-rad-20 hov1 s-text1 trans-0-4'>${result['save']}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('.no-comment').remove();
             $('textarea[name=comment]').val("");
             $('.comments').prepend(html);
             var count_comment = parseInt($('.number-comment').html());

@@ -99,7 +99,7 @@
                                     <span class="user-name text-bold-600">
                                         {{ Auth::user()->email }}
                                     </span>
-                                    <span class="user-status">
+                                    <span class="user-status text-success">
                                         Online
                                     </span>
                                 </div>
@@ -110,10 +110,13 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button class="dropdown-item" type=submit>
-                                        <i class="feather icon-power"></i> Logout
+                                    <button class="dropdown-item w-100" type=submit>
+                                        <i class="feather icon-power text-danger"></i> Logout
                                     </button>
                                 </form>
+                                <a class="dropdown-item" href="{{ route('home') }}">
+                                    <i class="feather icon-chevrons-left text-warning"></i> Back to Game Store
+                                </a>
                             </div>
                         </li>
                     </ul>
@@ -153,25 +156,26 @@
                     <span>Models</span>
                 </li>
                 <li class="account nav-item">
-                    <a href="{{ route('accounts.index') }}">
+                    <a href="{{ route('manage-accounts.index') }}">
                         <i class="feather icon-unlock"></i>
                         <span class="menu-title" data-i18n="Account">Account</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="comment nav-item">
+                    <a href="{{ route('manage-comments.index') }}">
                         <i class="feather icon-message-circle"></i>
                         <span class="menu-title" data-i18n="Comment">Comment</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
+
+                <li class="game nav-item">
+                    <a href="{{ route('manage-games.index') }}">
                         <i class="feather icon-gitlab"></i>
                         <span class="menu-title" data-i18n="Game">Game</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="genre nav-item">
+                    <a href="{{ route('manage-genres.index') }}">
                         <i class="feather icon-filter"></i>
                         <span class="menu-title" data-i18n="Genres">Genres</span>
                     </a>

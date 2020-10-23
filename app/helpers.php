@@ -28,3 +28,33 @@
             return number_format($number , 0, ',', '.');
         }
     }
+
+    if (!function_exists('isUser')) {
+        function isUser()
+        {
+            if(Auth::check()) {
+                if(Auth::user()->role == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    if (!function_exists('isAdmin')) {
+        function isAdmin()
+        {
+            if(Auth::check()) {
+                if(Auth::user()->role == 9) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
