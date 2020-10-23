@@ -180,8 +180,8 @@
                         <span class="menu-title" data-i18n="Genres">Genres</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="payment nav-item">
+                    <a href="{{ route('manage-payments.index') }}">
                         <i class="feather icon-shopping-cart"></i>
                         <span class="menu-title" data-i18n="Payment">Payment</span>
                     </a>

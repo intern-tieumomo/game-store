@@ -16,7 +16,7 @@ class IsLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role != 9) {
+        if (Auth::check()) {
             return $next($request);
         } else {
             return redirect()->route('login');
