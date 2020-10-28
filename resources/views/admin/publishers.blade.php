@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Payment || Game Store')
+@section('title', 'Publisher || Game Store')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="bower_components/admin/css/core/menu/menu-types/vertical-menu.css">
@@ -18,14 +18,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Payment</h2>
+                            <h2 class="content-header-title float-left mb-0">Publisher</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a>
                                     </li>
                                     <li class="breadcrumb-item">Models
                                     </li>
-                                    <li class="breadcrumb-item active">Payment
+                                    <li class="breadcrumb-item active">Publisher
                                     </li>
                                 </ol>
                             </div>
@@ -54,37 +54,46 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>ID</th>
-                                    <th>Account</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>View Detail</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Publish History</th>
+                                    <th>ACTION</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($payments as $payment)
+                                @foreach($publishers as $publisher)
                                 <tr>
                                     <td></td>
-                                    <td>{{ $payment->id }}</td>
-                                    <td class="product-user" id="product-user">{{ $payment->account->email }}</td>
-                                    <td class="product-date" id="product-date">{{ $payment->payment_date }}</td>
-                                    <td class="product-amount" id="product-amount">{{ moneyFormat($payment->amount) }}</td>
-                                    <td class="text-success" data-toggle="modal" data-target="#payment-detail-{{ $payment->id }}">Detail <i class="feather icon-corner-right-up"></td>
-                                    <div class="modal fade text-left" id="payment-detail-{{ $payment->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                    <td class="product-name">{{ $publisher->name }}</td>
+                                    <td class="product-address">{{ $publisher->address }}</td>
+                                    <td class="product-phone">{{ $publisher->phone }}</td>
+                                    <td>
+                                        <span class="action-view-info text-success" data-toggle="modal" data-target="#history-{{ $publisher->id }}">
+                                            View History <i class="feather icon-corner-right-up"></i>
+                                        </span>
+                                    </td>
+                                    <td class="product-action">
+                                        <span class="action-delete text-danger" data-id="{{ $publisher->id }}"><i class="feather icon-trash"></i></span>
+                                    </td>
+                                    <!-- Modal -->
+                                    <div class="modal fade text-left" id="history-{{ $publisher->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel1">Payment Detail</h4>
+                                                    <h4 class="modal-title" id="myModalLabel1">Publish history of {{ $publisher->name }}</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    @foreach ($payment->paymentDetails as $detail)
-                                                        <h5><i class="fa fa-credit-card" aria-hidden="true"></i> {{ moneyFormat($detail->subtotal) }}</h5>
-                                                        <p><i class="fa fa-gamepad" aria-hidden="true"></i> {{ $detail->game->title }}</p>
+                                                    @foreach ($publisher->games as $game)
+                                                        <h5>
+                                                            <i class="fa fa-gamepad"></i>
+                                                            <a class="text-success" href="{{ route('games.detail', ['id' => $game->id]) }}">{{ $game->title }}</a>
+                                                        </h5>
+                                                        <p><i class="fa fa-calendar" aria-hidden="true"></i> {{ $game->release_date }}</p><hr>
                                                     @endforeach
-                                                    <hr>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -153,14 +162,14 @@
     <script src="bower_components/admin/js/scripts/modal/components-modal.js"></script>
     <script>
         $(document).ready(function() {
-            $('.payment').addClass("active");
+            $('.publisher').addClass("active");
             $('input[type=search]').removeClass('form-control-sm');
             $('.custom-select').css('border', 'none');
             $('.dt-buttons').remove();
 
-            // $('.table').on('click', '.product-post', function(e) {
+            // $('.table').on('click', '.product-title', function(e) {
             //     e.stopPropagation();
-            //     var post_id = $(this).html();
+            //     var post_id = $(this).data('id');
                 
             //     Swal.fire({
             //         title: 'Game Store',

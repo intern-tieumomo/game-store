@@ -12,7 +12,7 @@ class Publisher extends Model
 
     public function games()
     {
-    	return $this->hasMany(Game::class);
+    	return $this->hasMany(Game::class)->orderBy('release_date');
     }
 
     public function pendingGames()

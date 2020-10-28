@@ -68,15 +68,15 @@
                                         <td></td>
                                         <td class="product-img"><img src="{{ asset('client/images/games/' . $game->id . '/preview.jpg') }}" alt="Img placeholder">
                                         <td class="product-title">{{ $game->title }}</td>
-                                        <td class="product-price">{{ moneyFormat($game->price) . config('string.vnd') }}</td>
+                                        <td class="product-price">{{ moneyFormat($game->price) }}</td>
                                         <td class="product-publisher">{{ $game->publisher->name }}</td>
                                         <td class="product-view-info">
-                                            <span class="action-view-info" data-toggle="modal" data-target="#info-{{ $game->id }}">
-                                                View More<i class="feather icon-corner-right-up"></i>
+                                            <span class="action-view-info text-success" data-toggle="modal" data-target="#info-{{ $game->id }}">
+                                                View More <i class="feather icon-corner-right-up"></i>
                                             </span>
                                         </td>
                                         <td class="product-action">
-                                            <span class="action-delete" data-id="{{ $game->id }}"><i class="feather icon-trash"></i></span>
+                                            <span class="action-delete text-danger" data-id="{{ $game->id }}"><i class="feather icon-trash"></i></span>
                                         </td>
                                         <!-- Modal -->
                                         <div class="modal fade text-left" id="info-{{ $game->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -92,7 +92,7 @@
                                                         <h5>Release Date</h5>
                                                         <p>{{ $game->release_date }}</p>
                                                         <h5>Price</h5>
-                                                        <p>{{ moneyFormat($game->price) . config('string.vnd') }}</p>
+                                                        <p>{{ moneyFormat($game->price) }}</p>
                                                         <h5>Summary</h5>
                                                         <p>{{ $game->summary }}</p>
                                                         <h5>Features</h5>

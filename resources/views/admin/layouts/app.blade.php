@@ -62,13 +62,17 @@
                     <ul class="nav navbar-nav float-right">
                         <li class="dropdown dropdown-language nav-item">
                             <a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="flag-icon flag-icon-us"></i><span class="selected-language">EN</span>
+                                @if (config('app.locale') == 'en')
+                                    <i class="flag-icon flag-icon-us"></i><span class="selected-language">EN</span>
+                                @else
+                                    <i class="flag-icon flag-icon-vn"></i><span class="selected-language">VI</span>
+                                @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdown-flag">
-                                <a class="dropdown-item" href="#" data-language="en">
+                                <a class="dropdown-item" href="{{ route('change-language', ['lang' => 'en']) }}" data-language="en">
                                     <i class="flag-icon flag-icon-us"></i> EN
                                 </a>
-                                <a class="dropdown-item" href="#" data-language="fr">
+                                <a class="dropdown-item" href="{{ route('change-language', ['lang' => 'vi']) }}" data-language="fr">
                                     <i class="flag-icon flag-icon-vn"></i> VI
                                 </a>
                             </div>
@@ -161,12 +165,6 @@
                         <span class="menu-title" data-i18n="Account">Account</span>
                     </a>
                 </li>
-                <li class="comment nav-item">
-                    <a href="{{ route('manage-comments.index') }}">
-                        <i class="feather icon-message-circle"></i>
-                        <span class="menu-title" data-i18n="Comment">Comment</span>
-                    </a>
-                </li>
 
                 <li class="game nav-item">
                     <a href="{{ route('manage-games.index') }}">
@@ -186,32 +184,20 @@
                         <span class="menu-title" data-i18n="Payment">Payment</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
-                        <i class="feather icon-file-text"></i>
-                        <span class="menu-title" data-i18n="Payment Detail">Payment Detail</span>
-                    </a>
-                </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="post nav-item">
+                    <a href="{{ route('manage-posts.index') }}">
                         <i class="feather icon-file"></i>
                         <span class="menu-title" data-i18n="Post">Post</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="publisher nav-item">
+                    <a href="{{ route('manage-publishers.index') }}">
                         <i class="feather icon-user"></i>
                         <span class="menu-title" data-i18n="Publisher">Publisher</span>
                     </a>
                 </li>
-                <li class=" nav-item">
-                    <a href="">
-                        <i class="feather icon-message-square"></i>
-                        <span class="menu-title" data-i18n="Review">Review</span>
-                    </a>
-                </li>
-                <li class=" nav-item">
-                    <a href="">
+                <li class="user nav-item">
+                    <a href="{{ route('manage-users.index') }}">
                         <i class="feather icon-users"></i>
                         <span class="menu-title" data-i18n="User">User</span>
                     </a>

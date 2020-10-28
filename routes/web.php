@@ -96,6 +96,9 @@ Route::middleware('locale')->group(function () {
             Route::resource('/manage-games', 'GameController');
             Route::resource('/manage-genres', 'GenreController');
             Route::resource('/manage-payments', 'PaymentController');
+            Route::resource('/manage-posts', 'PostController');
+            Route::resource('/manage-publishers', 'PublisherController');
+            Route::resource('/manage-users', 'UserController');
             
             //requests
             Route::resource('/pending-games', 'PendingGameController');

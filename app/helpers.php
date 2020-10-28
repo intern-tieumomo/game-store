@@ -25,7 +25,15 @@
     if (!function_exists('moneyFormat')) {
         function moneyFormat($number)
         {
-            return number_format($number , 0, ',', '.');
+            $locale = config('app.locale');
+            switch($locale) {
+                case 'vi':
+                    return number_format($number , 0, ',', '.') . config('string.vnd');
+                    break;
+                case 'en':
+                    return number_format($number/23000 , 2, ',', '.') . config('string.usd');
+                    break;
+            }
         }
     }
 
